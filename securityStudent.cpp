@@ -23,3 +23,10 @@ void SecurityStudent::print() {
 	 this->Student::print();
 	 cout << "SECURITY";
 }
+
+SecurityStudent::~SecurityStudent() {
+
+	 Student::~Student();
+	 //call super destructor from Student in case something needs to be released
+
+}
