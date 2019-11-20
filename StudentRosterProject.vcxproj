@@ -33,10 +33,6 @@
     <ClCompile Include="softwareStudent.cpp" />
     <ClCompile Include="student.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include=".gitignore" />
-    <None Include="README.md" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{F407E230-00E5-4BFC-A2D4-4F235D45AB09}</ProjectGuid>
