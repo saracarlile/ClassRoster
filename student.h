@@ -28,7 +28,7 @@ public:
 	 string GetEmailAddress();
 	 int GetAge();
 	 int* GetCourseDays();
-	 virtual Degree getDegreeProgram() = 0;  //Student class virtual class cannot make student object
+	 
 
 	 void SetID(string studentID);
 	 void SetFirstName(string firstName);
@@ -37,6 +37,8 @@ public:
 	 void SetCourseDays(int courseDays[]);
 
 	 virtual void print() = 0; //virtual method print student data
+
+	 virtual Degree GetDegreeProgram() = 0;  //Student class virtual class cannot make student object
 
 	 //The descructor
 	 ~Student();
