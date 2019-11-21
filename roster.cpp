@@ -23,8 +23,7 @@ Roster::Roster(int capacity) {
 	 this->classRosterArray = new Student*[capacity]; //array of pointers to Students of size capacity
 }
 
-void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1,
-	 int daysInCourse2, int daysInCourse3, Degree program) {
+void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree program) {
 
 	 if (program == SECURITY ) {
 		  int daysInCourse[Student::courseDaysArraySize]; //array size from Student class
@@ -145,7 +144,9 @@ int main() {
 				 program = SOFTWARE;
 			}
 
-
+			//add the students to the roster, objects for each student class will be created in ADD method
+			classRoster->add(studentIDTemp, firstNameTemp, lastNameTemp, emailAddressTemp, ageTemp, courseDays1Temp, courseDays2Temp, courseDays3Temp, program);
+			
 			cout << studentIDTemp << " " << firstNameTemp << " " << lastNameTemp << " " << emailAddressTemp << " " << ageTemp << " ";
 			cout << courseDays1Temp << " " << courseDays2Temp << " " << courseDays3Temp << " " << program << " " << endl << endl;
 
