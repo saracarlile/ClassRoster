@@ -76,24 +76,78 @@ int main() {
 	 // parse studentData and add each student to classRoster.
    
 	 for (int i = 0; i < numStudents; i++) {
-		  string temp1 = studentData[i];
-		  cout << temp1 << endl;
-		  cout << "Let's try this string splitter" << endl << endl << endl << endl;
+		  string row = studentData[i];
+		 // cout << row << endl;
+		  //cout << "Let's try this string splitter" << endl << endl << endl << endl;
 		  // string::substr() and string::find(). 
 		  //temp variables to store values during loop to build object
 		  string studentIDTemp;
+		  string firstNameTemp;
 		  string lastNameTemp;
 		  string emailAddressTemp;
 		  int ageTemp;
 		  int courseDays1Temp;
 		  int courseDays2Temp;
 		  int courseDays3Temp;
-		  Degree programTemp;
+		  string degreeProgramTemp;
+		  Degree program;
+
+		  //read student ID in row studentData[i]
+		  int rightHandSide = row.find(",");
+		  studentIDTemp = row.substr(0, rightHandSide);
+
+			//read firstName
+			int leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			firstNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+			//read lastName
+			leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			lastNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+			//read emailAddress
+			leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			emailAddressTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+			//read age
+			leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			ageTemp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+			//read course days 1 value
+			leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			courseDays1Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+			//read course days 2 value
+			leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			courseDays2Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+			//read course days 3 value
+			leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			courseDays3Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+			leftHandSide = rightHandSide + 1;
+			rightHandSide = row.find(",", leftHandSide);
+			degreeProgramTemp= row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+			if (degreeProgramTemp == "SECURITY") {
+				 program = SECURITY;
+			}
+			if (degreeProgramTemp == "NETWORK") {
+				 program = NETWORK;	
+			}
+			if (degreeProgramTemp == "SOFTWARE") {
+				 program = SOFTWARE;
+			}
 
 
-
-
-
+			cout << studentIDTemp << " " << firstNameTemp << " " << lastNameTemp << " " << emailAddressTemp << " " << ageTemp << " ";
+			cout << courseDays1Temp << " " << courseDays2Temp << " " << courseDays3Temp << " " << program << " " << endl << endl;
 
 
 
