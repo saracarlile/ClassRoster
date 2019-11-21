@@ -39,7 +39,7 @@ public:
 
 	 virtual void print() = 0; //virtual method print student data
 
-	 virtual Degree GetDegreeProgram() = 0;  //Student class virtual class cannot make student object
+	 virtual Degree GetDegreeProgram() = 0;  //this is a virtual method
 
 	 //The descructor
 	 ~Student();
