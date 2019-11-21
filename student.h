@@ -3,6 +3,7 @@
 using std::string;
 #include "degree.h"
 
+//this is an abstract class with virtual methods, you cannot create student objects
 
 class Student {
 
