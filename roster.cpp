@@ -80,6 +80,20 @@ int main() {
 		  cout << temp1 << endl;
 		  cout << "Let's try this string splitter" << endl << endl << endl << endl;
 		  // string::substr() and string::find(). 
+		  //temp variables to store values during loop to build object
+		  string studentIDTemp;
+		  string lastNameTemp;
+		  string emailAddressTemp;
+		  int ageTemp;
+		  int courseDays1Temp;
+		  int courseDays2Temp;
+		  int courseDays3Temp;
+		  Degree programTemp;
+
+
+
+
+
 
 
 
