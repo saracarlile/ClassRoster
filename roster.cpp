@@ -53,8 +53,6 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 	 }
 
 	 
-	 
-	 
 }
 
 void Roster::printAll() {
@@ -162,10 +160,12 @@ int main() {
 	 // Create an instance of the Roster class called classRoster.
 	 Roster * classRoster = new Roster(numStudents);
 
+	 //build classRosterArray in classRoster class to store student data
 	 for (int i = 0; i < numStudents; i++) {
 		  classRoster->parseThenAdd(studentData[i]);
 	 }
-	
+  	
+	 //print classRosterArray
 	 classRoster->printAll();
 
 
