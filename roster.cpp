@@ -24,6 +24,8 @@ Roster::Roster(int capacity) {
 }
 
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree program) {
+	 cout << lastIndex << "LAST INDEX ++" << endl;
+	 lastIndex++;
 
 	 if (program == SECURITY ) {
 		  int daysInCourse[Student::courseDaysArraySize]; //array size from Student class
@@ -31,7 +33,7 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 		  daysInCourse[1] = daysInCourse2;
 		  daysInCourse[2] = daysInCourse3;
 
-		  new SecurityStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
+		  classRosterArray[lastIndex] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
 	 }
 	 if (program == NETWORK) {
 		  int daysInCourse[Student::courseDaysArraySize]; //array size from Student class
@@ -39,7 +41,7 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 		  daysInCourse[1] = daysInCourse2;
 		  daysInCourse[2] = daysInCourse3;
 
-		  new NetworkStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
+		  classRosterArray[lastIndex] =  new NetworkStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
 	 }
 	 if (program == SOFTWARE) {
 		  int daysInCourse[Student::courseDaysArraySize]; //array size from Student class
@@ -47,9 +49,97 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 		  daysInCourse[1] = daysInCourse2;
 		  daysInCourse[2] = daysInCourse3;
 
-		  new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
+		  classRosterArray[lastIndex] =  new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
+	 }
+
+	 
+	 
+	 
+}
+
+void Roster::printAll() {
+
+	 for (int i = 0; i <= this->lastIndex; i++) {
+		  (this->classRosterArray)[i]->print();
 	 }
 }
+
+void Roster::parseThenAdd(string row) {
+	 // parse studentData and add each student to classRoster.
+
+		  //temp variables to store values during loop to build object
+		  string studentIDTemp;
+		  string firstNameTemp;
+		  string lastNameTemp;
+		  string emailAddressTemp;
+		  int ageTemp;
+		  int courseDays1Temp;
+		  int courseDays2Temp;
+		  int courseDays3Temp;
+		  string degreeProgramTemp;
+		  Degree program;
+
+		  //read student ID in row studentData[i]
+		  int rightHandSide = row.find(",");
+		  studentIDTemp = row.substr(0, rightHandSide);
+
+		  //read firstName
+		  int leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  firstNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+		  //read lastName
+		  leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  lastNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+		  //read emailAddress
+		  leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  emailAddressTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+		  //read age
+		  leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  ageTemp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+		  //read course days 1 value
+		  leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  courseDays1Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+		  //read course days 2 value
+		  leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  courseDays2Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+		  //read course days 3 value
+		  leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  courseDays3Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+
+		  leftHandSide = rightHandSide + 1;
+		  rightHandSide = row.find(",", leftHandSide);
+		  degreeProgramTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+
+		  if (degreeProgramTemp == "SECURITY") {
+				program = SECURITY;
+		  }
+		  if (degreeProgramTemp == "NETWORK") {
+				program = NETWORK;
+		  }
+		  if (degreeProgramTemp == "SOFTWARE") {
+				program = SOFTWARE;
+		  }
+
+		  //add the students to the roster, objects for each student class will be created in ADD method
+		  add(studentIDTemp, firstNameTemp, lastNameTemp, emailAddressTemp, ageTemp, courseDays1Temp, courseDays2Temp, courseDays3Temp, program);
+
+		  //cout << studentIDTemp << " " << firstNameTemp << " " << lastNameTemp << " " << emailAddressTemp << " " << ageTemp << " ";
+		  //cout << courseDays1Temp << " " << courseDays2Temp << " " << courseDays3Temp << " " << program << " " << endl << endl;
+
+} 
+
 
 
 int main() {
@@ -72,87 +162,11 @@ int main() {
 	 // Create an instance of the Roster class called classRoster.
 	 Roster * classRoster = new Roster(numStudents);
 
-	 // parse studentData and add each student to classRoster.
-   
 	 for (int i = 0; i < numStudents; i++) {
-		  string row = studentData[i];
-		 // cout << row << endl;
-		  //cout << "Let's try this string splitter" << endl << endl << endl << endl;
-		  // string::substr() and string::find(). 
-		  //temp variables to store values during loop to build object
-		  string studentIDTemp;
-		  string firstNameTemp;
-		  string lastNameTemp;
-		  string emailAddressTemp;
-		  int ageTemp;
-		  int courseDays1Temp;
-		  int courseDays2Temp;
-		  int courseDays3Temp;
-		  string degreeProgramTemp;
-		  Degree program;
-
-		  //read student ID in row studentData[i]
-		  int rightHandSide = row.find(",");
-		  studentIDTemp = row.substr(0, rightHandSide);
-
-			//read firstName
-			int leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			firstNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
-
-			//read lastName
-			leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			lastNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
-
-			//read emailAddress
-			leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			emailAddressTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
-
-			//read age
-			leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			ageTemp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
-
-			//read course days 1 value
-			leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			courseDays1Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
-
-			//read course days 2 value
-			leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			courseDays2Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
-
-			//read course days 3 value
-			leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			courseDays3Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
-
-			leftHandSide = rightHandSide + 1;
-			rightHandSide = row.find(",", leftHandSide);
-			degreeProgramTemp= row.substr(leftHandSide, rightHandSide - leftHandSide);
-
-			if (degreeProgramTemp == "SECURITY") {
-				 program = SECURITY;
-			}
-			if (degreeProgramTemp == "NETWORK") {
-				 program = NETWORK;	
-			}
-			if (degreeProgramTemp == "SOFTWARE") {
-				 program = SOFTWARE;
-			}
-
-			//add the students to the roster, objects for each student class will be created in ADD method
-			classRoster->add(studentIDTemp, firstNameTemp, lastNameTemp, emailAddressTemp, ageTemp, courseDays1Temp, courseDays2Temp, courseDays3Temp, program);
-			
-			cout << studentIDTemp << " " << firstNameTemp << " " << lastNameTemp << " " << emailAddressTemp << " " << ageTemp << " ";
-			cout << courseDays1Temp << " " << courseDays2Temp << " " << courseDays3Temp << " " << program << " " << endl << endl;
-
-
-
+		  classRoster->parseThenAdd(studentData[i]);
 	 }
+	
+	 classRoster->printAll();
 
 
 	 return 0;
