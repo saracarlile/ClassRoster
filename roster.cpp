@@ -28,28 +28,20 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 	 lastIndex++;
 
 	 if (program == SECURITY ) {
-		  int daysInCourse[Student::courseDaysArraySize]; //array size from Student class
-		  daysInCourse[0] = daysInCourse1;
-		  daysInCourse[1] = daysInCourse2;
-		  daysInCourse[2] = daysInCourse3;
+		  int courseDaysArray[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
 
-		  classRosterArray[lastIndex] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
+		  classRosterArray[lastIndex] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, courseDaysArray, program);
 	 }
 	 if (program == NETWORK) {
-		  int daysInCourse[Student::courseDaysArraySize]; //array size from Student class
-		  daysInCourse[0] = daysInCourse1;
-		  daysInCourse[1] = daysInCourse2;
-		  daysInCourse[2] = daysInCourse3;
+		  int courseDaysArray[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
 
-		  classRosterArray[lastIndex] =  new NetworkStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
+		  classRosterArray[lastIndex] =  new NetworkStudent(studentID, firstName, lastName, emailAddress, age, courseDaysArray, program);
 	 }
 	 if (program == SOFTWARE) {
-		  int daysInCourse[Student::courseDaysArraySize]; //array size from Student class
-		  daysInCourse[0] = daysInCourse1;
-		  daysInCourse[1] = daysInCourse2;
-		  daysInCourse[2] = daysInCourse3;
+		  int courseDaysArray[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+		
 
-		  classRosterArray[lastIndex] =  new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, program);
+		  classRosterArray[lastIndex] =  new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, courseDaysArray, program);
 	 }
 
 	 
@@ -66,59 +58,51 @@ void Roster::parseThenAdd(string row) {
 	 // parse studentData and add each student to classRoster.
 
 		  //temp variables to store values during loop to build object
-		  string studentIDTemp;
-		  string firstNameTemp;
-		  string lastNameTemp;
-		  string emailAddressTemp;
-		  int ageTemp;
-		  int courseDays1Temp;
-		  int courseDays2Temp;
-		  int courseDays3Temp;
-		  string degreeProgramTemp;
+
 		  Degree program;
 
 		  //read student ID in row studentData[i]
 		  int rightHandSide = row.find(",");
-		  studentIDTemp = row.substr(0, rightHandSide);
+		  string studentIDTemp = row.substr(0, rightHandSide);
 
 		  //read firstName
 		  int leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  firstNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+		  string firstNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
 
 		  //read lastName
 		  leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  lastNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+		  string lastNameTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
 
 		  //read emailAddress
 		  leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  emailAddressTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+		  string emailAddressTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
 
 		  //read age
 		  leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  ageTemp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+		  int ageTemp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
 
 		  //read course days 1 value
 		  leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  courseDays1Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+		  int courseDays1Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
 
 		  //read course days 2 value
 		  leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  courseDays2Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+		  int courseDays2Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
 
 		  //read course days 3 value
 		  leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  courseDays3Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
+		  int courseDays3Temp = std::stoi(row.substr(leftHandSide, rightHandSide - leftHandSide));  // convert string to int using std::stoi( str )
 
 		  leftHandSide = rightHandSide + 1;
 		  rightHandSide = row.find(",", leftHandSide);
-		  degreeProgramTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
+		  string degreeProgramTemp = row.substr(leftHandSide, rightHandSide - leftHandSide);
 
 		  if (degreeProgramTemp == "SECURITY") {
 				program = SECURITY;
@@ -133,8 +117,8 @@ void Roster::parseThenAdd(string row) {
 		  //add the students to the roster, objects for each student class will be created in ADD method
 		  add(studentIDTemp, firstNameTemp, lastNameTemp, emailAddressTemp, ageTemp, courseDays1Temp, courseDays2Temp, courseDays3Temp, program);
 
-		  //cout << studentIDTemp << " " << firstNameTemp << " " << lastNameTemp << " " << emailAddressTemp << " " << ageTemp << " ";
-		  //cout << courseDays1Temp << " " << courseDays2Temp << " " << courseDays3Temp << " " << program << " " << endl << endl;
+		/*  cout << studentIDTemp << " " << firstNameTemp << " " << lastNameTemp << " " << emailAddressTemp << " " << ageTemp << " ";
+		  cout << courseDays1Temp << " " << courseDays2Temp << " " << courseDays3Temp << " " << program << " " << endl << endl;*/
 
 } 
 
@@ -144,7 +128,7 @@ int main() {
 
 	 int numStudents = 5;
 
-	 const string studentData[] = {
+	 const string studentData[5] = {
 		  "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
 		  "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
 		  "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",

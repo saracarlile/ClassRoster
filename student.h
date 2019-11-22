@@ -8,7 +8,7 @@ using std::string;
 class Student {
 
 public:
-	 const static int courseDaysArraySize = 4;
+	 const static int courseDaysArraySize = 3;
 
 protected:
 	 string studentID;
@@ -21,7 +21,7 @@ protected:
 
 public:
 	 Student();  //empty constructor
-	 Student(string studentID, string firstName, string lastName, string emailAddress, int age, int coureDays[]); //constructor with parameters
+	 Student(string studentID, string firstName, string lastName, string emailAddress, int age, int courseDays[]); //constructor with parameters
 
 	 string GetStudentID();
 	 string GetFirstName();

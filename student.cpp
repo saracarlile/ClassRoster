@@ -24,7 +24,7 @@ Student::Student() {
 }
 //constructor with parameter definition
 
-Student::Student(string studentID, string firstName, string lastName, string emailAddress, int age, int coureDays[]) {
+Student::Student(string studentID, string firstName, string lastName, string emailAddress, int age, int courseDays[]) {
 
 	 this->studentID = studentID;
 	 this->firstName = firstName;
@@ -58,7 +58,7 @@ int Student::GetAge() {
 	 return age;
 }
 
-int* Student::GetCourseDays() {
+int * Student::GetCourseDays() {
 	 return courseDays;
 }
 
@@ -88,6 +88,7 @@ void Student::SetCourseDays(int courseDays[]) {
 
 //print method displays all fields except degree program
 void Student::print() {
+	 cout << endl << endl;
 	 cout << studentID << endl;
 	 cout << firstName << endl;
 	 cout << lastName << endl;
@@ -96,7 +97,6 @@ void Student::print() {
 	 cout << courseDays[0] << endl;
 	 cout << courseDays[1] << endl;
 	 cout << courseDays[2] << endl;
-	 cout << courseDays[3] << endl;
 }
 
 Student::~Student() {
