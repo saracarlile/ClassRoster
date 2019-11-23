@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <regex>
 #include "roster.h"
 using std::string;
 using std::cout;
@@ -121,6 +122,30 @@ void Roster::parseThenAdd(string row) {
 } 
 
 
+// https://stackoverflow.com/questions/36903985/email-validation-in-c
+bool is_email_valid(const std::string& email) {
+	 // define a regular expression
+	 const std::regex pattern
+	 ("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+
+	 // try to match the string with the regular expression
+	 return std::regex_match(email, pattern);
+};
+
+void Roster::printInvalidEmails() {
+	 //A valid email should include an at sign ('@') and period ('.') and should not include a space (' ')
+	  
+	 for (int i = 0; i <= this->lastIndex; i++) {
+		  string testEmail = (this->classRosterArray)[i]-> GetEmailAddress();
+		  bool isValidEmail = is_email_valid(testEmail);
+		  if (!isValidEmail) {
+				cout << testEmail << " is not a valid email." << endl;
+		  }
+	 }
+	 
+}
+
+
 
 int main() {
 
@@ -148,8 +173,12 @@ int main() {
 	 }
   	
 	 //print classRosterArray
-	 classRoster->printAll();
+	 cout << "Printing ClassRosterArray..." << endl << endl;
+	 classRoster->printAll(); 
 
+	 cout << endl << endl;
+	 cout << "Checking for invalid emails..." << endl << endl;
+	 classRoster->printInvalidEmails();
 
 	 return 0;
 }
