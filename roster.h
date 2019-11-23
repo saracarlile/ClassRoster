@@ -23,10 +23,9 @@ public:
 		  int daysInCourse2, int daysInCourse3, Degree program); //  sets the instance variables and updates the roster.
 	 void remove(string studentID); //removes students from the roster by student ID. If the student ID does not exist, the function prints student was not found.
 	 void printAll(); //loop through classRosterArray and call the print() function for each student.
-	 void printDaysInCourse(string studentID); // prints a student’s average number of days in the three courses. 
+	 void printAverageDaysInCourse(string studentID); // prints a student’s average number of days in the three courses. 
 	 void printInvalidEmails(); /*verifies student email addresses and displays all invalid email addresses to the user
 			A valid email should include an at sign ('@') and period ('.') and should not include a space (' ').*/
 	 void printByDegreeProgram(int degreeProgram); //prints out student information for a degree program specified by an enumerated type
-	 
 	 ~Roster(); //Descructor destroys the roster, releasing any resources it requested dynamically
 }; 

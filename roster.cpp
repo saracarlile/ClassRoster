@@ -117,8 +117,6 @@ void Roster::parseThenAdd(string row) {
 
 		  //add the students to the roster, objects for each student class will be created in ADD method
 		  add(studentIDTemp, firstNameTemp, lastNameTemp, emailAddressTemp, ageTemp, courseDays1Temp, courseDays2Temp, courseDays3Temp, program);
-
-	
 } 
 
 
@@ -145,8 +143,26 @@ void Roster::printInvalidEmails() {
 	 
 }
 
+Student* Roster::getStudentAt(int index) {
+	 return classRosterArray[index];
+}
 
 
+void Roster::printAverageDaysInCourse(string studentID) {
+	 bool found = false;
+	 for (int i = 0; i <= lastIndex; i++) {
+		  if (this->classRosterArray[i]->GetStudentID() == studentID) {
+				found = true;
+				int* days = classRosterArray[i]->GetCourseDays();
+				cout << "Average number of course days " << studentID << " is " << (days[0] + days[1] + days[2]) / 3 << endl;
+		  }
+		 // if (!found) cout << "Student not found!" << endl << endl;
+	 }
+
+
+}
+
+//classRoster.printAverageDaysInCourse(/*current_object's student id*/)
 int main() {
 
 	 int numStudents = 5;
@@ -179,6 +195,12 @@ int main() {
 	 cout << endl << endl;
 	 cout << "Checking for invalid emails..." << endl << endl;
 	 classRoster->printInvalidEmails();
+
+	 cout << endl << endl;
+	 cout << "Printing average number of days in course..." << endl << endl;
+	 for (int i = 0; i < numStudents; i++) {
+		  classRoster->printAverageDaysInCourse(classRoster->getStudentAt(i)->GetStudentID());
+	 }
 
 	 return 0;
 }
