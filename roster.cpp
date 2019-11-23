@@ -24,7 +24,7 @@ Roster::Roster(int capacity) {
 }
 
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree program) {
-	 cout << lastIndex << "LAST INDEX ++" << endl;
+
 	 lastIndex++;
 
 	 if (program == SECURITY ) {
@@ -117,9 +117,7 @@ void Roster::parseThenAdd(string row) {
 		  //add the students to the roster, objects for each student class will be created in ADD method
 		  add(studentIDTemp, firstNameTemp, lastNameTemp, emailAddressTemp, ageTemp, courseDays1Temp, courseDays2Temp, courseDays3Temp, program);
 
-		/*  cout << studentIDTemp << " " << firstNameTemp << " " << lastNameTemp << " " << emailAddressTemp << " " << ageTemp << " ";
-		  cout << courseDays1Temp << " " << courseDays2Temp << " " << courseDays3Temp << " " << program << " " << endl << endl;*/
-
+	
 } 
 
 

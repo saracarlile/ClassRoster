@@ -22,6 +22,7 @@ void SecurityStudent::print() {
 
 	 this->Student::print();
 	 cout << "SECURITY";
+	 cout << "\n";
 }
 
 SecurityStudent::~SecurityStudent() {

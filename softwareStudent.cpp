@@ -23,6 +23,7 @@ void SoftwareStudent::print() {
 
 	 this->Student::print();
 	 cout << "SOFTWARE";
+	 cout << "\n";
 }
 
 SoftwareStudent::~SoftwareStudent() {

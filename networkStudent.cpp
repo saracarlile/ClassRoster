@@ -23,6 +23,7 @@ void NetworkStudent::print() {
 
 	 this->Student::print();
 	 cout << "NETWORK";
+	 cout << "\n";
 }
 
 NetworkStudent::~NetworkStudent() {

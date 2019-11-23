@@ -88,15 +88,11 @@ void Student::SetCourseDays(int courseDays[]) {
 
 //print method displays all fields except degree program
 void Student::print() {
-	 cout << endl << endl;
-	 cout << studentID << endl;
-	 cout << firstName << endl;
-	 cout << lastName << endl;
-	 cout << emailAddress << endl;
-	 cout << age << endl;
-	 cout << courseDays[0] << endl;
-	 cout << courseDays[1] << endl;
-	 cout << courseDays[2] << endl;
+	 cout << "\t" << "First Name: " << firstName;
+	 cout << "\t" << "Last Name: " << lastName;
+	 cout << "\t" << "Age: " << age;
+	 cout << "\t" << "daysInCourse: {" << courseDays[0] << ", " << courseDays[1] << ", " << courseDays[2] << "} ";
+	 cout << "Degree Program: ";
 }
 
 Student::~Student() {
@@ -104,3 +100,4 @@ Student::~Student() {
 }
 
 
+/* [tab] First Name: John [tab] Last Name: Smith [tab] Age: 20 [tab]daysInCourse: {35, 40, 55} Degree Program: Security.*/
