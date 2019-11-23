@@ -162,7 +162,7 @@ void Roster::printAverageDaysInCourse(string studentID) {
 
 }
 
-//classRoster.printAverageDaysInCourse(/*current_object's student id*/)
+
 int main() {
 
 	 int numStudents = 5;
