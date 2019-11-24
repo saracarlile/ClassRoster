@@ -18,6 +18,7 @@ public:
 	 Roster(int capacity);//this constructor creates roster, initializes default values, and sets max size
 
 	 Student* getStudentAt(int index);
+	 bool checkNumStudents(int numStudents);
 	 void parseThenAdd(string row); //parses the strings, creates the Student objects, and adds them to roster
 	 void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1,
 		  int daysInCourse2, int daysInCourse3, Degree program); //  sets the instance variables and updates the roster.

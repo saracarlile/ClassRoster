@@ -24,6 +24,14 @@ Roster::Roster(int capacity) {
 	 this->classRosterArray = new Student*[capacity]; //array of pointers to Students of size capacity
 }
 
+Roster::~Roster() {//destroys all the students (Descructor)
+	 for (int i = 0; i <= lastIndex; i++) {
+		  delete this->classRosterArray[i]; //deletes each student first
+	 }
+	 delete classRosterArray; //deletes the dynamically allocated array of pointers to students
+
+}
+
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree program) {
 
 	 lastIndex++;
@@ -158,8 +166,41 @@ void Roster::printAverageDaysInCourse(string studentID) {
 		  }
 		 // if (!found) cout << "Student not found!" << endl << endl;
 	 }
+}
 
+void Roster::printByDegreeProgram(int degreeProgram) {
+	 for (int i = 0; i <= lastIndex; i++) {
+		  if (this->classRosterArray[i]->GetDegreeProgram() == degreeProgram) this->classRosterArray[i]->print();
+	 }
+}
 
+void Roster::remove(string Id) {
+	 bool found = false;
+	 for (int i = 0; i <= lastIndex; i++) {
+		  if (this->classRosterArray[i]->GetStudentID() == Id) {
+				found = true; //delete it
+				delete this->classRosterArray[i];
+				//move this student to last position, no gaps in array
+				this->classRosterArray[i] = this->classRosterArray[lastIndex];
+				lastIndex--;
+		  }
+	 }
+	 if (found == true) {
+		  cout << "STUDENT " << Id << " REMOVED." << endl;
+	 }
+	 else {
+		  cout << "STUDENT " << Id << " NOT FOUND." << endl;
+	 }
+}
+
+bool Roster::checkNumStudents(int numStudents) {
+	 if (numStudents != lastIndex - 1) {
+		  return false;
+	 }
+	 else {
+		  return true;
+	 }
+	
 }
 
 
@@ -175,7 +216,7 @@ int main() {
 		  "A5,Sara,Carlile,scarl51@wgu.edu,38, 34, 58, 56 ,SOFTWARE" };
 
     //Print the course title, the programming language used, your student ID, and your name.
-	 cout << "Scripting and Programming - Applications – C867" << endl;
+	 cout << "Scripting and Programming - Applications C867" << endl;
 	 cout << "Programming language: C++" << endl;
 	 cout << "Student ID: #001106597" << endl;
 	 cout << "Sara Carlile" << endl << endl << endl;
@@ -201,6 +242,31 @@ int main() {
 	 for (int i = 0; i < numStudents; i++) {
 		  classRoster->printAverageDaysInCourse(classRoster->getStudentAt(i)->GetStudentID());
 	 }
+
+	 cout << endl << endl;
+	 cout << "Printing out student information for a degree program specified by an enumerated type..." << endl << endl;
+	 classRoster->printByDegreeProgram(SOFTWARE);
+
+
+	 cout << endl << endl;
+	 cout << "Remvoving student with ID A3...." << endl << endl;
+	 classRoster->remove("A3");
+
+	 if (classRoster->checkNumStudents(numStudents) == false) {
+		  numStudents--;
+	 }
+
+	 cout << endl << endl;
+	 cout << "Remvoving student with ID A3...." << endl << endl;
+	 classRoster->remove("A3");
+
+	 if (classRoster->checkNumStudents(numStudents) == false) {
+		  numStudents--;
+	 }
+
+	 cout << endl << endl;
+	 cout << "Calling the destructor to release the Roster memory....." << endl << endl;
+	 classRoster->~Roster();
 
 	 return 0;
 }
